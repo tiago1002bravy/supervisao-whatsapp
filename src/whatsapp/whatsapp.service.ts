@@ -67,7 +67,7 @@ export class WhatsappService {
       return 'ignored';
     }
 
-    if (!msg?.isGroup) {
+    if (!msg) {
       return 'ignored';
     }
 
