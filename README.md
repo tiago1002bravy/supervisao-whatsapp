@@ -1,85 +1,48 @@
 # Supervisão WhatsApp
 
-Supervisione os grupos de WhatsApp da sua empresa direto pelo Claude Code — sem dashboard, sem app, só comandos.
+Supervisione os grupos e conversas de WhatsApp da sua empresa direto pelo Claude Code — sem dashboard, sem app, só comandos.
 
 ## O que faz
 
-- Recebe mensagens dos grupos via webhook Zappfy
+- Recebe mensagens (grupos e privado) via webhook Zappfy
 - Armazena tudo no PostgreSQL
 - Expõe alertas de grupos sem resposta e conflitos
 - Comandos de análise prontos para usar no Claude Code
 
 ---
 
-## Passo a passo de instalação
+## Instalação
 
-### 1. Fork do repositório
+### Pré-requisitos
 
-Faça um fork deste repositório no GitHub para a sua conta.
+- [Claude Code](https://claude.ai/code) instalado (`npm install -g @anthropic-ai/claude-code`)
+- Conta no [Railway](https://railway.app)
+- Conta no [Zappfy](https://zappfy.com.br) com uma instância criada e WhatsApp conectado
 
-### 2. Deploy no Railway
+### Passo a passo
 
-1. Acesse [railway.app](https://railway.app) e crie um novo projeto
-2. Adicione um serviço **PostgreSQL** (botão "Add Service")
-3. Adicione um serviço **GitHub Repo** e selecione o fork
-4. Na aba **Variables** do serviço, adicione as variáveis do arquivo `.env.example`
-
-5. O deploy roda automaticamente — anote a URL pública gerada (ex: `https://meu-projeto.up.railway.app`)
-
-### 3. Criar conta no Zappfy
-
-Acesse [zappfy.com.br](https://zappfy.com.br) e crie sua conta.
-
-### 4. Criar instância no Zappfy
-
-1. No painel do Zappfy, crie uma nova instância
-2. Copie o **token** da instância — você usou ele no passo 2
-3. Conecte o WhatsApp escaneando o QR code
-
-### 5. Configurar webhook no Zappfy
-
-Na instância criada, configure o webhook:
-
-```
-URL: https://SEU-PROJETO.up.railway.app/webhooks/whatsapp
-```
-
-### 6. Instalar Claude Code
-
-```bash
-npm install -g @anthropic-ai/claude-code
-```
-
-### 7. Clonar o repositório
+**1.** Faça um fork deste repositório e clone localmente:
 
 ```bash
 git clone https://github.com/SEU-USUARIO/supervisao-whatsapp
 cd supervisao-whatsapp
 ```
 
-### 8. Configurar o CLAUDE.md
-
-Abra o arquivo `CLAUDE.md` e edite as duas linhas:
-
-```
-API_BASE_URL=https://SEU-PROJETO.up.railway.app
-EMPRESA=Nome da Sua Empresa
-```
-
-### 9. Abrir o Claude Code
+**2.** Abra o Claude Code na pasta:
 
 ```bash
 claude
 ```
 
-### 10. Usar os comandos
+**3.** Execute o instalador:
 
 ```
-/sem-resposta
-/dashboard
-/conflitos
-/resumo-dia
+/instalar
 ```
+
+O Claude vai pedir as credenciais e cuidar de todo o resto — Railway, banco, deploy e configuração.
+
+**4.** Único passo manual: configurar a URL do webhook no painel do Zappfy (o instalador vai te mostrar a URL exata).
 
 ---
 
