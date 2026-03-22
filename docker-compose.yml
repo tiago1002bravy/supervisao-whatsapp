@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: client_monitor
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  app:
+    build: .
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@db:5432/client_monitor
+      UAZAPI_BASE_URL: http://localhost:3333
+      UAZAPI_TOKEN: dev-token
+      UAZAPI_WEBHOOK_SECRET: dev-secret
+      NODE_ENV: development
+      PORT: 3000
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+
+volumes:
+  pgdata:
