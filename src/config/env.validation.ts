@@ -20,9 +20,6 @@ class EnvironmentVariables {
   @IsString()
   UAZAPI_WEBHOOK_SECRET!: string;
 
-  @IsString()
-  OPENAI_API_KEY!: string;
-
   @IsOptional()
   @IsInt()
   @Min(1)
@@ -32,18 +29,6 @@ class EnvironmentVariables {
   @IsOptional()
   @IsEnum(NodeEnv)
   NODE_ENV: NodeEnv = NodeEnv.Development;
-
-  @IsOptional()
-  @IsString()
-  GOOGLE_SERVICE_ACCOUNT_KEY?: string;
-
-  @IsOptional()
-  @IsString()
-  GOOGLE_IMPERSONATE_EMAIL?: string;
-
-  @IsOptional()
-  @IsString()
-  GOOGLE_TEAM_ROOT_FOLDER_ID?: string;
 }
 
 export function validate(config: Record<string, unknown>) {

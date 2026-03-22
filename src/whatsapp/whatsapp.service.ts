@@ -41,7 +41,6 @@ export interface PrivateChat {
 
 type IngestResult = 'saved' | 'duplicate' | 'ignored';
 
-// mediaType values that indicate voice/audio messages requiring transcription
 const AUDIO_MEDIA_TYPES = ['ptt', 'audio', 'myaudio'];
 
 // messageType values for media that should be saved with a label even without text
@@ -83,11 +82,7 @@ export class WhatsappService {
     let content: string;
 
     if (isAudio) {
-      const transcription = await this.transcribeAudio(dto);
-      if (!transcription) {
-        return 'ignored';
-      }
-      content = `[Áudio] ${transcription}`;
+      content = '[Áudio]';
     } else {
       const extracted = this.extractContent(dto);
       if (!extracted) {
@@ -223,46 +218,4 @@ export class WhatsappService {
     return results.sort((a, b) => b.unreadCount - a.unreadCount);
   }
 
-  private async transcribeAudio(dto: UazapiWebhookDto): Promise<string | null> {
-    const baseUrl = this.configService.get<string>('UAZAPI_BASE_URL');
-    const token = this.configService.get<string>('UAZAPI_TOKEN');
-    const openaiApiKey = this.configService.get<string>('OPENAI_API_KEY');
-    const msgId = dto.message?.messageid ?? dto.message?.id;
-
-    try {
-      const response = await fetch(`${baseUrl}/message/download`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          token: token!,
-        },
-        body: JSON.stringify({
-          id: msgId,
-          transcribe: true,
-          openai_apikey: openaiApiKey,
-          generate_mp3: true,
-          return_link: false,
-        }),
-      });
-
-      if (!response.ok) {
-        this.logger.error(
-          `UazAPI download failed: ${response.status} ${response.statusText}`,
-        );
-        return null;
-      }
-
-      const data = (await response.json()) as { transcription?: string };
-
-      if (!data.transcription) {
-        this.logger.warn(`Empty transcription for message id: ${msgId}`);
-        return null;
-      }
-
-      return data.transcription;
-    } catch (err) {
-      this.logger.error(`Failed to transcribe audio for message id: ${msgId}`, err);
-      return null;
-    }
-  }
 }
