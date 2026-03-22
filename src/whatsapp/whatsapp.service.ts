@@ -2,7 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ClientsService } from '../clients/clients.service';
-import { UazapiWebhookDto } from './dto/uazapi-webhook.dto';
+import { ZappfyWebhookDto } from './dto/zappfy-webhook.dto';
 import { Message } from './entities/message.entity';
 
 interface ZappfyChat {
@@ -60,7 +60,7 @@ export class WhatsappService {
     private readonly clientsService: ClientsService,
   ) {}
 
-  async ingestWebhook(dto: UazapiWebhookDto): Promise<IngestResult> {
+  async ingestWebhook(dto: ZappfyWebhookDto): Promise<IngestResult> {
     const msg = dto.message;
 
     if (dto.EventType !== 'messages') {
@@ -130,7 +130,7 @@ export class WhatsappService {
    * Extracts human-readable content for non-audio messages.
    * Returns null only if the message has no meaningful content to store.
    */
-  private extractContent(dto: UazapiWebhookDto): string | null {
+  private extractContent(dto: ZappfyWebhookDto): string | null {
     const msg = dto.message;
     if (!msg) return null;
 

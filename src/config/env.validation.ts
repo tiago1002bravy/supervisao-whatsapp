@@ -12,7 +12,7 @@ class EnvironmentVariables {
   DATABASE_URL!: string;
 
   @IsString()
-  UAZAPI_TOKEN!: string;
+  ZAPPFY_TOKEN!: string;
 
   @IsOptional()
   @IsInt()

@@ -1,5 +1,5 @@
 import { Body, Controller, HttpCode, Post } from '@nestjs/common';
-import { UazapiWebhookDto } from './dto/uazapi-webhook.dto';
+import { ZappfyWebhookDto } from './dto/zappfy-webhook.dto';
 import { WhatsappService } from './whatsapp.service';
 
 @Controller('webhooks')
@@ -8,7 +8,7 @@ export class WebhookController {
 
   @Post('whatsapp')
   @HttpCode(200)
-  async receiveWebhook(@Body() dto: UazapiWebhookDto) {
+  async receiveWebhook(@Body() dto: ZappfyWebhookDto) {
     const result = await this.whatsappService.ingestWebhook(dto);
     return { result };
   }

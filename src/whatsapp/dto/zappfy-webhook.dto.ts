@@ -68,7 +68,7 @@ class WebhookMessage {
   reaction?: string;
 }
 
-export class UazapiWebhookDto {
+export class ZappfyWebhookDto {
   @IsOptional()
   @IsString()
   EventType?: string;

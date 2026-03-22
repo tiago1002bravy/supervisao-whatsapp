@@ -16,7 +16,7 @@ services:
     build: .
     environment:
       DATABASE_URL: postgres://postgres:postgres@db:5432/supervisao_whatsapp
-      UAZAPI_TOKEN: dev-token
+      ZAPPFY_TOKEN: dev-token
       TEAM_PHONES: ''
       TEAM_NAMES: ''
       NODE_ENV: development
