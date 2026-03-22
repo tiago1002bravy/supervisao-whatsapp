@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: uazapiGO -  WhatsApp API (v2.0)
+  title: Zappfy API (v2.0)
   version: 1.0.0
   description: >
     API para gerenciamento de instâncias do WhatsApp e comunicações.
@@ -38,14 +38,8 @@ info:
 
     - Servidores gratuitos/demo podem ter restrições adicionais de tempo de vida
 servers:
-  - url: https://{subdomain}.uazapi.com
-    description: Servidor da API uazapiGO
-    variables:
-      subdomain:
-        enum:
-          - free
-          - api
-        default: free
+  - url: https://zappfy-v2.uazapi.com
+    description: Servidor da API Zappfy
 components:
   securitySchemes:
     token:
@@ -164,7 +158,7 @@ components:
         profilePicUrl: https://example.com/profile.jpg
         isBusiness: true
         plataform: Android
-        systemName: uazapi
+        systemName: Zappfy
         owner: user@example.com
         lastDisconnect: '2025-01-24T14:00:00Z'
         lastDisconnectReason: Network error
@@ -1468,11 +1462,7 @@ tags:
       desconectar e verificar o status.
   - name: Proxy
     description: >
-      A uazapiGO opera com um proxy interno como padrão.
-
-      Você pode manter esse padrão, configurar um proxy próprio via `proxy_url` ou usar seu celular android como proxy
-      instalando o app em https://github.com/uazapi/silver_proxy_apk (APK direto:
-      https://github.com/uazapi/silver_proxy_apk/raw/refs/heads/main/silver_proxy.apk).
+      A Zappfy opera com um proxy interno como padrão.
 
       Se nada for enviado, seguimos no proxy interno. IPs são brasileiros; para clientes internacionais, considere um
       proxy da região do cliente.
@@ -1776,7 +1766,7 @@ paths:
                   example: minha-instancia
                 systemName:
                   type: string
-                  description: Nome do sistema (opcional, padrão 'uazapiGO' se não informado)
+                  description: Nome do sistema (opcional, padrão 'zappfy-v2' se não informado)
                   example: apilocal
                 adminField01:
                   type: string
@@ -1898,7 +1888,7 @@ paths:
                   profilePicUrl: https://example.com/profile.jpg
                   isBusiness: true
                   plataform: Android
-                  systemName: uazapi
+                  systemName: zappfy-v2
                   owner: user@example.com
                   created: '2024-01-01T12:00:00.000Z'
                   updated: '2024-01-01T12:30:00.000Z'
@@ -2529,16 +2519,14 @@ paths:
         - Proxy
       summary: Obter configuração de proxy da instância
       description: >
-        A uazapiGO opera com um proxy interno como padrão.
+        A zappfy-v2 opera com um proxy interno como padrão.
 
         Observação: nossos IPs são brasileiros. Se você atende clientes internacionais, considere usar um proxy do
         país/região do seu cliente (via `proxy_url`).
 
         Você pode:
           (1) continuar no proxy interno padrão;
-          (2) usar um proxy próprio informando `proxy_url`. Se nada for definido, seguimos no proxy interno; ou
-          (3) usar seu celular android como proxy instalando o aplicativo disponibilizado pela uazapi em https://github.com/uazapi/silver_proxy_apk (APK direto: https://github.com/uazapi/silver_proxy_apk/raw/refs/heads/main/silver_proxy.apk).
-
+          (2) usar um proxy próprio informando `proxy_url`. Se nada for definido, seguimos no proxy interno;
         A resposta desse endpoint traz o estado atual do proxy e o último teste de conectividade.
       security:
         - token: []
@@ -2601,10 +2589,6 @@ paths:
         Se nada for enviado, seguimos no proxy interno. A URL é validada antes de salvar. A conexão pode ser reiniciada
         automaticamente para aplicar a mudança.
 
-
-        Opcional: você pode usar seu celular android como proxy instalando o aplicativo disponibilizado pela uazapi em
-        https://github.com/uazapi/silver_proxy_apk (APK direto:
-        https://github.com/uazapi/silver_proxy_apk/raw/refs/heads/main/silver_proxy.apk).
       security:
         - token: []
       requestBody:
@@ -6980,7 +6964,7 @@ paths:
                   description: Nome do grupo
                   minLength: 1
                   maxLength: 100
-                  example: uazapiGO grupo
+                  example: zappfy-v2 grupo
                 participants:
                   type: array
                   description: Lista de números de telefone dos participantes iniciais
@@ -7086,7 +7070,7 @@ paths:
                 $ref: ../schemas/group.yaml#/Group
               example:
                 JID: 120363153742561022@g.us
-                Name: uazapiGO Community
+                Name: zappfy-v2 Community
                 Participants:
                   - JID: 5521987654321@s.whatsapp.net
                     IsAdmin: true
@@ -7161,7 +7145,7 @@ paths:
                 $ref: ../schemas/group.yaml#/Group
               example:
                 JID: 120363153742561022@g.us
-                Name: uazapiGO Community
+                Name: zappfy-v2 Community
                 Participants:
                   - JID: 5521987654321@s.whatsapp.net
                     IsAdmin: true
@@ -10333,8 +10317,8 @@ paths:
                 delete: false
                 knowledge:
                   active: true
-                  tittle: Informações sobre a uazapi
-                  content: A uazapi foi originalmente desenvolvida...
+                  tittle: Informações sobre a zappfy-v2
+                  content: A zappfy-v2 foi originalmente desenvolvida...
       responses:
         '200':
           description: Conhecimento atualizado com sucesso
