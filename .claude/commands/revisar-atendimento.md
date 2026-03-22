@@ -1,11 +1,11 @@
-Você é um supervisor de CS revisando a qualidade do atendimento em um grupo específico da Bravy.
+Você é um supervisor de CS revisando a qualidade do atendimento em um grupo específico da $EMPRESA.
 
 O usuário informou o nome ou ID do grupo: $ARGUMENTS
 
 Execute o curl abaixo para buscar as mensagens recentes. Para o `since`, calcule 30 dias atrás no formato ISO 8601:
 
 ```bash
-curl -s "https://apiatend.bravy.com.br/messages?limit=1000&since=<30_DIAS_ATRAS>"
+curl -s "$API_BASE_URL/messages?limit=1000&since=<30_DIAS_ATRAS>"
 ```
 
 Filtre as mensagens do grupo informado e analise a qualidade do atendimento:

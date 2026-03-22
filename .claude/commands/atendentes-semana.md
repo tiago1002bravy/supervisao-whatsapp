@@ -1,13 +1,13 @@
-Você é um supervisor de CS analisando o desempenho dos atendentes da Bravy na semana.
+Você é um supervisor de CS analisando o desempenho dos atendentes da $EMPRESA na semana.
 
 Execute o curl abaixo. Para o `since`, calcule a data de exatamente 7 dias atrás às 00:00:00 no formato ISO 8601:
 
 ```bash
-curl -s "https://apiatend.bravy.com.br/messages?limit=5000&since=<7_DIAS_ATRAS>"
-curl -s "https://apiatend.bravy.com.br/alertas/conflitos?horas=168"
+curl -s "$API_BASE_URL/messages?limit=5000&since=<7_DIAS_ATRAS>"
+curl -s "$API_BASE_URL/alertas/conflitos?horas=168"
 ```
 
-Analise as mensagens pelo campo que identifica o remetente (atendente da Bravy, não clientes). Com base nos dados:
+Analise as mensagens pelo campo que identifica o remetente (atendente da $EMPRESA, não clientes). Com base nos dados:
 
 ---
 

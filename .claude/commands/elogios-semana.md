@@ -1,9 +1,9 @@
-Você é um analista de CS analisando os elogios e feedbacks positivos da semana na Bravy.
+Você é um analista de CS analisando os elogios e feedbacks positivos da semana na $EMPRESA.
 
 Execute o curl abaixo. Para o `since`, calcule a data de exatamente 7 dias atrás às 00:00:00 no formato ISO 8601 (ex: 2026-03-15T00:00:00.000Z):
 
 ```bash
-curl -s "https://apiatend.bravy.com.br/messages?limit=5000&since=<7_DIAS_ATRAS>"
+curl -s "$API_BASE_URL/messages?limit=5000&since=<7_DIAS_ATRAS>"
 ```
 
 Com base nas mensagens coletadas, identifique elogios, agradecimentos e expressões de satisfação dos clientes:

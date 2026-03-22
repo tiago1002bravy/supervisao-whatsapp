@@ -1,4 +1,4 @@
-Consulte https://apiatend.bravy.com.br/alertas/conflitos?horas=24 via curl e liste os conflitos das últimas 24 horas.
+Consulte $API_BASE_URL/alertas/conflitos?horas=24 via curl e liste os conflitos das últimas 24 horas.
 
 Apresente em formato de tabela com:
 - Cliente

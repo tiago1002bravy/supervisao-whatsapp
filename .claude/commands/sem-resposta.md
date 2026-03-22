@@ -1,4 +1,4 @@
-Consulte https://apiatend.bravy.com.br/alertas/sem-resposta?min=30 via curl e liste os grupos aguardando resposta da Bravy.
+Consulte $API_BASE_URL/alertas/sem-resposta?min=30 via curl e liste os grupos aguardando resposta da $EMPRESA.
 
 Remova da lista qualquer grupo cujo campo `cliente` seja "João Pedro Nascimento".
 

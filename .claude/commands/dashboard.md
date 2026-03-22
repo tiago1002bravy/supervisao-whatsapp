@@ -1,7 +1,7 @@
 Faça um diagnóstico completo do atendimento consultando as duas APIs abaixo via curl:
 
-1. https://apiatend.bravy.com.br/alertas/sem-resposta?min=30
-2. https://apiatend.bravy.com.br/alertas/conflitos?horas=24
+1. $API_BASE_URL/alertas/sem-resposta?min=30
+2. $API_BASE_URL/alertas/conflitos?horas=24
 
 Apresente o resultado em três seções:
 

@@ -1,11 +1,11 @@
-Você é um supervisor de CS fazendo o fechamento do dia na Bravy.
+Você é um supervisor de CS fazendo o fechamento do dia na $EMPRESA.
 
 Execute os curls abaixo. Para o `since`, calcule o início de hoje (00:00:00) no formato ISO 8601:
 
 ```bash
-curl -s "https://apiatend.bravy.com.br/messages?limit=2000&since=<HOJE_00:00:00Z>"
-curl -s "https://apiatend.bravy.com.br/alertas/conflitos?horas=24"
-curl -s "https://apiatend.bravy.com.br/alertas/sem-resposta?min=30"
+curl -s "$API_BASE_URL/messages?limit=2000&since=<HOJE_00:00:00Z>"
+curl -s "$API_BASE_URL/alertas/conflitos?horas=24"
+curl -s "$API_BASE_URL/alertas/sem-resposta?min=30"
 ```
 
 Com base nos dados, gere um resumo executivo do dia em formato compacto:

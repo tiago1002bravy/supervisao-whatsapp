@@ -1,10 +1,10 @@
-Você é um analista de CS analisando as reclamações da semana na Bravy.
+Você é um analista de CS analisando as reclamações da semana na $EMPRESA.
 
 Execute os dois curls abaixo. Para o `since`, calcule a data de exatamente 7 dias atrás às 00:00:00 no formato ISO 8601 (ex: 2026-03-15T00:00:00.000Z):
 
 ```bash
-curl -s "https://apiatend.bravy.com.br/alertas/conflitos?horas=168"
-curl -s "https://apiatend.bravy.com.br/messages?limit=5000&since=<7_DIAS_ATRAS>"
+curl -s "$API_BASE_URL/alertas/conflitos?horas=168"
+curl -s "$API_BASE_URL/messages?limit=5000&since=<7_DIAS_ATRAS>"
 ```
 
 Com base nos dados coletados, identifique e liste os principais motivos de reclamação da semana de forma objetiva e direta:

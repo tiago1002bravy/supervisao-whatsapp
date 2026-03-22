@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "curl -s 'https://apiatend.bravy.com.br/alertas/sem-resposta?min=30' | python3 -c \"import sys,json; d=json.load(sys.stdin); t=d.get('total') or d.get('data',{}).get('total',0); print(f'\\u26a0\\ufe0f  {t} grupo(s) aguardando resposta da Bravy')\" 2>/dev/null || true",
+            "command": "API_BASE_URL=$(grep -oE 'API_BASE_URL=[^ ]+' CLAUDE.md 2>/dev/null | cut -d= -f2); curl -s \"$API_BASE_URL/alertas/sem-resposta?min=30\" | python3 -c \"import sys,json; d=json.load(sys.stdin); t=d.get('total') or d.get('data',{}).get('total',0); print(f'\\u26a0\\ufe0f  {t} grupo(s) aguardando resposta')\" 2>/dev/null || true",
             "statusMessage": "Verificando atendimentos pendentes..."
           }
         ]
