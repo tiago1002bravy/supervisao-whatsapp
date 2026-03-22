@@ -12,7 +12,7 @@ Pergunte ao usuário, uma de cada vez, aguardando a resposta antes de continuar:
    "Acesse https://railway.app/account/tokens, crie um token e cole aqui:"
 
 2. **Zappfy Token**
-   "Acesse o painel do Zappfy, abra sua instância, copie o token e cole aqui:"
+   "Acesse https://dash.zappfy.io/signin, abra sua instância, copie o token e cole aqui:"
 
 3. **Telefones da equipe**
    "Liste os telefones da sua equipe com DDD+DDI, separados por vírgula (ex: 5521999999999,5521988888888):"

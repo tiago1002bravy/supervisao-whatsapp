@@ -17,7 +17,7 @@ Supervisione os grupos e conversas de WhatsApp da sua empresa direto pelo Claude
 
 - [Claude Code](https://claude.ai/code) instalado (`npm install -g @anthropic-ai/claude-code`)
 - Conta no [Railway](https://railway.app)
-- Conta no [Zappfy](https://zappfy.com.br) com uma instância criada e WhatsApp conectado
+- Conta no [Zappfy](https://dash.zappfy.io/signin) com uma instância criada e WhatsApp conectado
 
 ### Passo a passo
 
