@@ -1,5 +1,4 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ClientsService } from '../clients/clients.service';
@@ -59,7 +58,6 @@ export class WhatsappService {
     @InjectRepository(Message)
     private readonly messageRepo: Repository<Message>,
     private readonly clientsService: ClientsService,
-    private readonly configService: ConfigService,
   ) {}
 
   async ingestWebhook(dto: UazapiWebhookDto): Promise<IngestResult> {
@@ -163,7 +161,7 @@ export class WhatsappService {
   }
 
   async getPrivateChats(instanceToken: string): Promise<PrivateChat[]> {
-    const baseUrl = this.configService.get<string>('UAZAPI_BASE_URL');
+    const baseUrl = 'https://zappfy-v2.uazapi.com';
     const headers = { 'Content-Type': 'application/json', token: instanceToken };
 
     // 1. Lista todos os chats da instância

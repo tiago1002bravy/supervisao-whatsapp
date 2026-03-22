@@ -12,9 +12,6 @@ class EnvironmentVariables {
   DATABASE_URL!: string;
 
   @IsString()
-  UAZAPI_BASE_URL!: string;
-
-  @IsString()
   UAZAPI_TOKEN!: string;
 
   @IsOptional()
