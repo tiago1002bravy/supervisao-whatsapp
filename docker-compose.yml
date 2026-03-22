@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: client_monitor
+      POSTGRES_DB: supervisao_whatsapp
     ports:
       - '5432:5432'
     volumes:
@@ -15,10 +15,10 @@ services:
   app:
     build: .
     environment:
-      DATABASE_URL: postgres://postgres:postgres@db:5432/client_monitor
-      UAZAPI_BASE_URL: http://localhost:3333
+      DATABASE_URL: postgres://postgres:postgres@db:5432/supervisao_whatsapp
       UAZAPI_TOKEN: dev-token
-      UAZAPI_WEBHOOK_SECRET: dev-secret
+      TEAM_PHONES: ''
+      TEAM_NAMES: ''
       NODE_ENV: development
       PORT: 3000
     ports:

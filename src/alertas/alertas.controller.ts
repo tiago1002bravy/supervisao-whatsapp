@@ -1,16 +1,8 @@
 import { Controller, Get, Query } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Message } from '../whatsapp/entities/message.entity';
-
-const BRAVY_PHONES = new Set([
-  '5521990639650',
-  '5524992769100',
-  '5521988988065',
-  '5521986333317',
-]);
-
-const BRAVY_NAMES = new Set(['Bravy', 'Tiago Teles', 'Ian Souza']);
 
 const CONFLICT_PATTERNS = [
   /\?\?\?\?/,                          // múltiplos ?
@@ -42,20 +34,29 @@ const CONFLICT_PATTERNS = [
 
 const EMOJI_ONLY = /^[\p{Emoji}\s]+$/u;
 
-function isBravy(phone: string, name: string | null | undefined): boolean {
-  return BRAVY_PHONES.has(phone) || BRAVY_NAMES.has(name ?? '');
-}
-
 function isConflict(content: string): boolean {
   return CONFLICT_PATTERNS.some((p) => p.test(content));
 }
 
 @Controller('alertas')
 export class AlertasController {
+  private readonly teamPhones: Set<string>;
+  private readonly teamNames: Set<string>;
+
   constructor(
     @InjectRepository(Message)
     private readonly messageRepo: Repository<Message>,
-  ) {}
+    private readonly config: ConfigService,
+  ) {
+    const phones = this.config.get<string>('TEAM_PHONES') ?? '';
+    const names = this.config.get<string>('TEAM_NAMES') ?? '';
+    this.teamPhones = new Set(phones.split(',').map((s) => s.trim()).filter(Boolean));
+    this.teamNames = new Set(names.split(',').map((s) => s.trim()).filter(Boolean));
+  }
+
+  private isTeam(phone: string, name: string | null | undefined): boolean {
+    return this.teamPhones.has(phone) || this.teamNames.has(name ?? '');
+  }
 
   @Get('sem-resposta')
   async semResposta(@Query('min') minMinutes = '30') {
@@ -69,7 +70,7 @@ export class AlertasController {
       .orderBy('m.sentAt', 'ASC')
       .getRawMany();
 
-    const groups = new Map<string, { lastClient: any; lastBravy: Date | null }>();
+    const groups = new Map<string, { lastClient: any; lastTeam: Date | null }>();
 
     for (const m of messages) {
       const gid: string = m.groupId ?? 'sem-grupo';
@@ -77,11 +78,11 @@ export class AlertasController {
       const name: string = m.m_sender_name;
       const sentAt = new Date(m.m_sent_at);
 
-      if (!groups.has(gid)) groups.set(gid, { lastClient: null, lastBravy: null });
+      if (!groups.has(gid)) groups.set(gid, { lastClient: null, lastTeam: null });
       const g = groups.get(gid)!;
 
-      if (isBravy(phone, name)) {
-        g.lastBravy = sentAt;
+      if (this.isTeam(phone, name)) {
+        g.lastTeam = sentAt;
       } else {
         g.lastClient = { name, phone, content: m.m_content, time: sentAt, groupId: gid };
       }
@@ -97,7 +98,7 @@ export class AlertasController {
 
     for (const [, g] of groups) {
       if (!g.lastClient) continue;
-      const semResposta = !g.lastBravy || g.lastClient.time > g.lastBravy;
+      const semResposta = !g.lastTeam || g.lastClient.time > g.lastTeam;
       if (!semResposta) continue;
 
       const ms = now.getTime() - g.lastClient.time.getTime();
@@ -107,7 +108,6 @@ export class AlertasController {
       const h = Math.floor(mins / 60);
       const m = mins % 60;
 
-      // Skip emoji-only messages
       if (EMOJI_ONLY.test(g.lastClient.content)) continue;
 
       result.push({
@@ -148,7 +148,7 @@ export class AlertasController {
     for (const m of messages) {
       const phone: string = m.m_sender_phone;
       const name: string = m.m_sender_name;
-      if (isBravy(phone, name)) continue;
+      if (this.isTeam(phone, name)) continue;
       if (!isConflict(m.m_content)) continue;
 
       result.push({

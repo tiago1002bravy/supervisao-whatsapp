@@ -23,6 +23,14 @@ class EnvironmentVariables {
   @IsOptional()
   @IsEnum(NodeEnv)
   NODE_ENV: NodeEnv = NodeEnv.Development;
+
+  @IsOptional()
+  @IsString()
+  TEAM_PHONES?: string;
+
+  @IsOptional()
+  @IsString()
+  TEAM_NAMES?: string;
 }
 
 export function validate(config: Record<string, unknown>) {
