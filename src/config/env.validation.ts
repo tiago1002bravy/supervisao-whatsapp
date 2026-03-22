@@ -17,9 +17,6 @@ class EnvironmentVariables {
   @IsString()
   UAZAPI_TOKEN!: string;
 
-  @IsString()
-  UAZAPI_WEBHOOK_SECRET!: string;
-
   @IsOptional()
   @IsInt()
   @Min(1)
