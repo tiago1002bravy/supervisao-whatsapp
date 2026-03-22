@@ -22,12 +22,7 @@ Faça um fork deste repositório no GitHub para a sua conta.
 1. Acesse [railway.app](https://railway.app) e crie um novo projeto
 2. Adicione um serviço **PostgreSQL** (botão "Add Service")
 3. Adicione um serviço **GitHub Repo** e selecione o fork
-4. Na aba **Variables** do serviço, adicione:
-
-| Variável | Valor |
-|---|---|
-| `DATABASE_URL` | (copie do serviço PostgreSQL → Connect) |
-| `UAZAPI_TOKEN` | Token da sua instância no Zappfy |
+4. Na aba **Variables** do serviço, adicione as variáveis do arquivo `.env.example`
 
 5. O deploy roda automaticamente — anote a URL pública gerada (ex: `https://meu-projeto.up.railway.app`)
 
@@ -106,17 +101,6 @@ claude
 | `/semana-em-numeros` | Relatório semanal executivo |
 | `/horario-pico` | Horários de maior demanda |
 | `/revisar-atendimento` | Revisão de um grupo específico |
-
----
-
-## Variáveis de ambiente
-
-| Variável | Descrição |
-|---|---|
-| `DATABASE_URL` | Connection string PostgreSQL |
-| `UAZAPI_TOKEN` | Token da instância Zappfy |
-| `PORT` | Porta do servidor (padrão: 3000) |
-| `NODE_ENV` | `development` ou `production` |
 
 ---
 
